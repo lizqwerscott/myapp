@@ -44,7 +44,7 @@
       var totalSlices;
 
       var blob = document.getElementById('ffile').files[0];
-      console.log(blob.size)
+      console.log(blob.size);
       
       var start = 0;
       var end;
@@ -78,7 +78,9 @@
           }
 
           slices--;
+          console.log(slices);
           if (slices == 0) {
+            content.log("mergeFile");
             mergeFile(blob);
             alert("File Upload Finish");
           }

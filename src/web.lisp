@@ -63,12 +63,12 @@
                                :if-exists :supersede :direction :output
                                :element-type '(unsigned-byte 8))
               (dolist (i (directory* (merge-pathnames (make-pathname :name :wild :type :wild) dirname)))
-                (with-open-file (out i :element-type '(unsigned-byte 8))
-                  ()
-                  )
-                )
-              )
-            ))
+                (let ((data (make-array 10 :fill-pointer 0 :adjustable t :element-type 'bit))) 
+                  (with-open-file (out i :element-type '(unsigned-byte 8))
+                    (read-sequence data out))
+                  (write-sequence data s)))))
+          (format nil "Finish")
+          )
 
 (defroute ("/uploadQFile" :method :post) (&key _parsed)
           (let* ((file (make-pathname :defaults (cdr (assoc "name" (cdr _parsed) :test #'string=))))
