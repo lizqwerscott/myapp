@@ -40,7 +40,7 @@
     }
     function sendRequest() {
       const BYTES_PER_CHUNK = 1024 * 1024;
-      var slices; 
+      var slices = 1; 
       var totalSlices;
 
       var blob = document.getElementById('ffile').files[0];
@@ -50,8 +50,10 @@
       var end;
       var index = 0;
 
-      slices = Math.ceil(blob.size / BYTES_PER_CHUNK);
-      totalSlices = slices;
+      totalSlices = Math.ceil(blob.size / BYTES_PER_CHUNK);
+      console.log(totalSlices);
+      console.log(slices);
+      console.log("-------");
 
       while (start < blob.size) {
         end = start + BYTES_PER_CHUNK;
@@ -59,28 +61,28 @@
           end = blob.size;
         }
 
-        uploadFile(blob, index, start, end);
+        uploadFile(blob, index, start, end, slices, totalSlices);
         start = end;
         index++;
+        slices++;
       }
     }
-    function uploadFile(blob, index, start, end) {
+    function uploadFile(blob, index, start, end, slices, totalSlices) {
       var xhr;
       var fd;
       var chunk;   
 
       xhr = new XMLHttpRequest();
       xhr.onreadystatechange = function() {
-        if (xhr.readState == 4) {
+        if (xhr.readyState == 4) {
           if (xhr.responeText) {
             alert(xhr.responeText);
             console.log("Finish");
           }
 
-          slices--;
           console.log(slices);
-          if (slices == 0) {
-            content.log("mergeFile");
+          if (slices == totalSlices) {
+            console.log("mergeFile");
             mergeFile(blob);
             alert("File Upload Finish");
           }
@@ -107,7 +109,6 @@
 
       fd = new FormData();
       fd.append("name", blob.name);
-      fd.append("index", totalSlices);
 
       xhr.open("POST", "/mergeFile", true);
 
@@ -126,7 +127,8 @@
   <form action="/upload-image" method="post" enctype="multipart/form-data">
     <input id="file" name="file" type="file">
     <input type="submit">
-  </form>
+  </form>  
+  <form> 
 </div>
 {% endblock %}
 
