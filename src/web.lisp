@@ -36,7 +36,7 @@
             )
           )
 
-(defparameter *file-storage-directory* #p"/home/lizqwer/test/")
+(defparameter *file-storage-directory* #p"/home/pi/test/")
 
 (defroute ("/upload-image" :method :post) (&key |file|)
   (let ((filename (second |file|))
@@ -51,8 +51,8 @@
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
 
-(defroute ("/uploadQFiletemp" :method :post) (&key _parsed)
-          (format t "UploadQFIle---------------------------------:~S" (cdr _parsed))
+(defroute ("/uploadQFile" :method :post) (&key _parsed)
+          (format t "UploadQFIle---------------------------------:~S" _parsed)
           (format nil "UploadFile:Finish"))
 
 (defroute ("/mergeFiles" :method :post) (&key _parsed)
@@ -60,7 +60,12 @@
           )
 
 (defroute ("/mergeFile" :method :post) (&key _parsed)
-          (let* ((file (make-pathname :defaults (cdr (car _parsed))))
+          ;(let* ((file (make-pathname :defaults (cdr (car _parsed))))
+          (format t "MergeFile----------------------:~S" _parsed)
+          )
+
+(defroute ("/mergeFiles" :method :post) (&key _parsed)
+          (let* ((file (make-pathname :defaults (cdr (assoc "name" _parsed :test #'string=))))
                  (dirname (merge-pathnames (format nil "~A/" (pathname-name file)) *file-storage-directory*)))
             (with-open-file (out (merge-pathnames file dirname)
                                :if-does-not-exist :create
@@ -75,7 +80,7 @@
                       (write-byte i out))))))
           (format nil "Finish"))
 
-(defroute ("/uploadQFile" :method :post) (&key _parsed)
+(defroute ("/uploadQFiles" :method :post) (&key _parsed)
           (let* ((file (make-pathname :defaults (cdr (assoc "name" (cdr _parsed) :test #'string=))))
                  (dirname (merge-pathnames (format nil "~A/" (pathname-name file)) *file-storage-directory*))
                 (data (slot-value (second (car _parsed)) 'flexi-streams::vector)))
