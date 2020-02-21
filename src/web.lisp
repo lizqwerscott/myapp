@@ -38,6 +38,11 @@
 
 (defparameter *file-storage-directory* #p"/home/pi/test/")
 
+(defroute "/counter" ()
+          (maphash #'(lambda (k v)
+                       (format t "K:~A, V:~A" k v)) *session*)
+          (format nil "You came here ~A times."(incf (gethash :counter *session* 0))))
+
 (defroute ("/upload-image" :method :post) (&key |file|)
   (let ((filename (second |file|))
     (data (slot-value (first |file|) 'flexi-streams::vector)))
