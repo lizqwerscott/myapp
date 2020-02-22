@@ -6,7 +6,8 @@
         :myapp.view
         :myapp.db
         :datafly
-        :sxql)
+        :sxql
+        :web-manager)
   (:export :*web*))
 (in-package :myapp.web)
 
@@ -36,6 +37,15 @@
             )
           )
 
+(defun standardize-parsed (parsed)
+  (mapcar #'(lambda (value)
+              (if (listp (cdr value))
+                  (cons (car value) (car (cdr value)))
+                  (cons (car value) (cdr value)))) parsed))
+
+(defun assoc-string (id lists)
+  (assoc id lists :test #'string=))
+
 (defparameter *file-storage-directory* #p"/home/pi/test/")
 
 (defroute "/counter" ()
@@ -58,8 +68,15 @@
   (format nil "Finish"))
 
 (defroute ("/add-task" :method :post) (&key _parsed)
-          (format t "Task-------------:~S" _parsed)
-          (format nil "Finish"))
+          (let ((parsed (standardize-parsed _parsed))) 
+            (add-task (list :id (assoc-string "id" parsed)
+                            :url (assoc-string "url" parsed)
+                            :attributes (assoc-string "attributes" parsedl)
+                            :come-from (assoc-string "come-from" parsed)
+                            :description (assoc-string "description" parsed)
+                            :download-type (assoc-string "download-type" parsed)
+                            :zipp (assoc-string "zipp" parsed)
+                            :password (assoc-string "passowrd" parsed)))))
 
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))

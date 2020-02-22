@@ -9,6 +9,9 @@
                "cl-ppcre"
                "uiop"
 
+               ;; My app
+               "web-manager"
+
                ;; for @route annotation
                "cl-syntax-annot"
 
