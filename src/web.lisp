@@ -41,9 +41,13 @@
 (defroute "/counter" ()
           (maphash #'(lambda (k v)
                        (format t "K:~A, V:~A" k v)) *session*)
-          (format nil "You came here ~A times."(incf (gethash :counter *session* 0))))
+          (format nil "You came here ~A times." (incf (gethash :count *session* 0))))
 
-(defroute ("/upload-image" :method :post) (&key |file|)
+(defroute ("/upload-image" :method :post) (&key _parsed)
+          (format t "Image--------:~S" _parsed)
+          (format nil "Finish"))
+
+(defroute ("/upload-images" :method :post) (&key |file|)
   (let ((filename (second |file|))
     (data (slot-value (first |file|) 'flexi-streams::vector)))
     (with-open-file (s (merge-pathnames filename *file-storage-directory*) 
