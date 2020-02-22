@@ -57,6 +57,10 @@
       (write-sequence data s)))
   (format nil "Finish"))
 
+(defroute ("/add-task" :method :post) (&key _parsed)
+          (format t "Task-------------:~S" _parsed)
+          (format nil "Finish"))
+
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
 

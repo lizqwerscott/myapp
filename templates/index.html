@@ -131,6 +131,21 @@
   <a herf="http://cn-hk-dmit.sakurafrp.com:48787/counter/">counter</a>
   <a herf="baidu.com">baidu</a>
 </div>
+<div id="task">
+  <form action="/add-task" method="post" enctype="multipart/form-data">
+    <ul>
+      <li>Name:<input name="id" type="txt"></li>
+      <li>Attrbutes:<input name="attributes" type="text"></li>
+      <li>Come-from:<input name="come-from" type="text"</li>
+      <li>Descriptname:<input name="description" type="text"></li>
+      <li>Download-type:<input name="downlaod-type" type="text"></li>
+      <li>zipp:<input name="zipp" type="radio" value="t">
+        <input name="zipp" type="radio" value="nil"></li>
+      <li>Password:<input name="password" type="text"></li>
+    </ul>
+    <input type="submit">
+  </form>
+</div>
 {% endblock %}
 
 
