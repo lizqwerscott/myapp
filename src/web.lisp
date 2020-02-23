@@ -67,10 +67,10 @@
       (write-sequence data s)))
   (format nil "Finish"))
 
-(defroute ("/add-tasks" :method :post) (&key _parsed)
-          (format t "task:~S" (assoc-string "name" (standardize-parsed _parsed))))
-
 (defroute ("/add-task" :method :post) (&key _parsed)
+          (format t "task:~S" (standardize-parsed _parsed)))
+
+(defroute ("/add-tasks" :method :post) (&key _parsed)
           (let ((parsed (standardize-parsed _parsed))) 
             (add-task (list :id  (assoc-string "id" parsed)
                             :url (assoc-string "url" parsed)

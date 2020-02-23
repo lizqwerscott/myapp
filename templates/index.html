@@ -2,130 +2,17 @@
 {% block title %}Welcome to lizqwer home{% endblock %}
 
 {% block content %}
-<script type="text/javascript">
-    function myPost(url, params) {
-      var temp = document.createElement("form");
-      temp.action = url;
-      temp.method = "post";
-      temp.style.display = "none";
-      for (var x in params) {
-        var opt = document.createElement("textarea");
-        opt.test = x;
-        temp.appendChild(opt);
-      }
-      document.body.appendChild(temp);
-      temp.submit();
-      return temp;
-    }
-    function sendR() {
-      var blob = document.getElementById('ffile').files[0];
-      var xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readState == 4) {
-          if (xhr.responeText) {
-            alert("Finish");
-            alert(xhr.responeText);
-          }
-        }
-      }
-      var start = 0;
-      var end = blob.size;
-      var chunk = blob.slice(start, end);
-
-      var fd = new FormData();
-      fd.append("ffile", chunk);
-      fd.append("name", blob.name);
-      xhr.open("POST", "/sendR", true);
-      xhr.send(fd);
-    }
-    function sendRequest() {
-      const BYTES_PER_CHUNK = 1024 * 1024;
-      var slices = 1; 
-      var totalSlices;
-
-      var blob = document.getElementById('ffile').files[0];
-      console.log(blob.size);
-      
-      var start = 0;
-      var end;
-      var index = 0;
-
-      totalSlices = Math.ceil(blob.size / BYTES_PER_CHUNK);
-      console.log(totalSlices);
-      console.log(slices);
-      console.log("-------");
-
-      while (start < blob.size) {
-        end = start + BYTES_PER_CHUNK;
-        if (end > blob.size) {
-          end = blob.size;
-        }
-
-        uploadFile(blob, index, start, end, slices, totalSlices);
-        start = end;
-        index++;
-        slices++;
-      }
-    }
-    function uploadFile(blob, index, start, end, slices, totalSlices) {
-      var xhr;
-      var fd;
-      var chunk;   
-
-      xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-          if (xhr.responeText) {
-            alert(xhr.responeText);
-            console.log("Finish");
-          }
-
-          console.log(slices);
-          if (slices == totalSlices) {
-            console.log("mergeFile");
-            mergeFile(blob);
-            alert("File Upload Finish");
-          }
-        }
-      };
-
-      chunk = blob.slice(start, end);
-
-      fd = new FormData();
-      fd.append("ffile", chunk);
-      fd.append("name", blob.name);
-      fd.append("index", index);
-
-      xhr.open("POST", "/uploadQFile", true);
-
-      xhr.setRequestHeader("X_Requested_With", location.href.split("/")[3].replace(/[^a-z]+/g, '$'));
-      xhr.send(fd);
-    }
-    function mergeFile(blob) {
-      var xhr;
-      var fd;
-
-      xhr = new XMLHttpRequest();
-
-      fd = new FormData();
-      fd.append("name", blob.name);
-
-      xhr.open("POST", "/mergeFile", true);
-
-      xhr.setRequestHeader("X_Requested_With", location.href.split("/")[3].replace(/[^a-z]+/g, '$'));
-      xhr.send(fd);
-    }
-
-  </script>
+<script src="/js/post.js"></script>
 
 <div id="main">
-  Welcome to Lizqwer home!
+  <p>Welcome to Lizqwer home!</p>
   <br>
     <input type="file" id="ffile"/>
   <button onclick="sendRequest()">Upload</button>
 
   <form action="/upload-image" method="post" enctype="multipart/form-data">
-    <input id="file" name="file" type="file">
+    <input id="file" name="file" type="file"><br>
+    <input name="s" type="text">
     <input type="submit">
   </form>  
   <a herf="http://cn-hk-dmit.sakurafrp.com:48787/counter/">counter</a>
@@ -133,19 +20,60 @@
 </div>
 <div id="task">
   <form action="/add-task" method="post" enctype="multipart/form-data">
-    <ul>
-      <li>Name:<input name="id" type="txt"></li>
-      <li>Url:<input name="url" type="text"></li>
-      <li>Attrbutes:<input name="attributes" type="text">
-                    <input name="attributes"</li>
-      <li>Come-from:<input name="come-from" type="text"</li>
-      <li>Descriptname:<input name="description" type="text"></li>
-      <li>Download-type:<input name="downlaod-type" type="text"></li>
-      <li>zipp:<input name="zipp" type="radio" value="t">
-        <input name="zipp" type="radio" value="nil"></li>
-      <li>Password:<input name="password" type="text"></li>
-    </ul>
+    <fieldset>
+      <p>
+        <label>Name:</label>
+        <input name="id" type="txt">
+      </p>
+      <p>
+        <label>Url:</label>
+        <input name="url" type="text">
+      </p>
+      <p>
+        <label>Attrbutes:</label>
+        <input list="attributes" name="attributes">
+        <datalist id="attributes">
+          <option value="Video">
+        </datalist>
+      </p>
+      <p>
+        <label>Come-from:</label>
+        <input list="come-from" name="come-from" type="text">
+        <datalist id="come-from">
+          <option value="Another">
+          <option value="LingMeiYushuo">
+          <option value="luoli">
+          <option value="MMD">
+          <option value="MS">
+          <option value="Normal">
+          <option value="shanchi">
+          <option value="YY">
+        </datalist>
+      </p>
+      <p>
+        <label>Descriptname:</label>
+        <input name="description" type="text">
+      </p>
+      <p>
+      <label>Download-type:</label>
+        <input name="downlaod-type" checked type="radio" value="local"> local
+        <input name="downlaod-type" type="radio" value="common"> common
+        <input name="downlaod-type" type="radio" value="baidu"> baidu
+      </p>
+      <p>
+        <label>zipp:</label>
+        <input name="zipp" checked type="radio" value="t"> t
+        <input name="zipp" type="radio" value="nil"> nil
+      </p>
+      <p>
+        <label>Password:</label>
+        <input list="password" name="password" type="text">
+        <datalist id="password">
+          <option value="nil">
+        </datalist>
+      </p>
     <input type="submit">
+    </fieldset>
   </form>
 </div>
 {% endblock %}

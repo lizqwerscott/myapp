@@ -19,3 +19,25 @@ a:hover {
 #main {
   text-align: center;
 }
+
+#main p {
+  color: red;
+}
+
+form fieldset {
+  border: 0;
+  text-align: center;
+}
+
+#task form fieldset p {
+  color: red;
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+}
+
+#task input {
+  width: 100px;
+}
+
+
