@@ -44,7 +44,7 @@
                   (cons (car value) (cdr value)))) parsed))
 
 (defun assoc-string (id lists)
-  (assoc id lists :test #'string=))
+  (cdr (assoc id lists :test #'string=)))
 
 (defparameter *file-storage-directory* #p"/home/pi/test/")
 
@@ -67,20 +67,22 @@
       (write-sequence data s)))
   (format nil "Finish"))
 
-(defroute ("/add-task :method :post") (&key _parsed)
-          (format t "task:~S" (standardize-parsed _parsed))
-          )
-
 (defroute ("/add-tasks" :method :post) (&key _parsed)
+          (format t "task:~S" (assoc-string "name" (standardize-parsed _parsed))))
+
+(defroute ("/add-task" :method :post) (&key _parsed)
           (let ((parsed (standardize-parsed _parsed))) 
-            (add-task (list :id (assoc-string "id" parsed)
+            (add-task (list :id  (assoc-string "id" parsed)
                             :url (assoc-string "url" parsed)
-                            :attributes (assoc-string "attributes" parsedl)
+                            :attributes (assoc-string "attributes" parsed)
                             :come-from (assoc-string "come-from" parsed)
                             :description (assoc-string "description" parsed)
                             :download-type (assoc-string "download-type" parsed)
-                            :zipp (assoc-string "zipp" parsed)
-                            :password (assoc-string "passowrd" parsed)))))
+                            :zipp (if (string= "t" (assoc-string "zipp" parsed)) t
+                                      (if (string= "nil" (assoc-string "zipp" parsed)) nil))
+                            :password (assoc-string "passowrd" parsed))))
+          (format nil "Finish")
+          )
 
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
