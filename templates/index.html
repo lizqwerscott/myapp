@@ -6,6 +6,7 @@
 
 <div id="main">
   <p>Welcome to Lizqwer home!</p>
+  <!--
   <br>
     <input type="file" id="ffile"/>
   <button onclick="sendRequest()">Upload</button>
@@ -17,27 +18,28 @@
   </form>  
   <a herf="http://cn-hk-dmit.sakurafrp.com:48787/counter/">counter</a>
   <a herf="baidu.com">baidu</a>
+  -->
 </div>
 <div id="task">
   <form action="/add-task" method="post" enctype="multipart/form-data">
     <fieldset>
       <p>
-        <label>Name:</label>
+        <label class="head">Name:</label>
         <input name="id" type="txt">
       </p>
       <p>
-        <label>Url:</label>
+        <label class="head">Url:</label>
         <input name="url" type="text">
       </p>
       <p>
-        <label>Attrbutes:</label>
+        <label class="head">Attrbutes:</label>
         <input list="attributes" name="attributes">
         <datalist id="attributes">
           <option value="Video">
         </datalist>
       </p>
       <p>
-        <label>Come-from:</label>
+        <label class="head">Come-from:</label>
         <input list="come-from" name="come-from" type="text">
         <datalist id="come-from">
           <option value="Another">
@@ -51,28 +53,28 @@
         </datalist>
       </p>
       <p>
-        <label>Descriptname:</label>
+        <label class="head">Descriptname:</label>
         <input name="description" type="text">
       </p>
       <p>
-      <label>Download-type:</label>
-        <input name="downlaod-type" checked type="radio" value="local"> local
-        <input name="downlaod-type" type="radio" value="common"> common
-        <input name="downlaod-type" type="radio" value="baidu"> baidu
+        <label class="head">Download-type:</label>
+        <input name="downlaod-type" checked type="radio" value="local" id="dt1" ><label for="dt1">local</label>
+        <input name="downlaod-type" type="radio" value="common" id="dt2"><label for="dt2">common</label>
+        <input name="downlaod-type" type="radio" value="baidu" id="dt3"><label for="dt3">baidu</label>
       </p>
       <p>
-        <label>zipp:</label>
-        <input name="zipp" checked type="radio" value="t"> t
-        <input name="zipp" type="radio" value="nil"> nil
+        <label class="head">zipp:</label>
+        <input name="zipp" checked type="radio" value="t" id="z1"><label for="z1">t</label>
+        <input name="zipp" type="radio" value="nil" id="z2"><label for="z2">nil</label>
       </p>
       <p>
-        <label>Password:</label>
+        <label class="head">Password:</label>
         <input list="password" name="password" type="text">
         <datalist id="password">
           <option value="nil">
         </datalist>
       </p>
-    <input type="submit">
+      <button type="submit">update</button> 
     </fieldset>
   </form>
 </div>
