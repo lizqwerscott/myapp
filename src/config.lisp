@@ -20,10 +20,12 @@
 (defparameter *template-directory* (merge-pathnames #P"templates/" *application-root*))
 
 (defconfig :common
-  `(:databases ((:maindb :sqlite3 :database-name ":memory:"))))
+  `(:application-root ,(asdf:component-pathname (asdf:find-system :myapp))
+    :databases ((:maindb :sqlite3 :database-name ,(merge-pathnames #P"db/test.db" *application-root*)))))
 
 (defconfig |development|
-  '())
+  `(:debug T
+    :databases ((:maindb :sqlite3 :database-name ,(merge-pathnames #P"./db/test.db" *application-root*)))))
 
 (defconfig |production|
   '())

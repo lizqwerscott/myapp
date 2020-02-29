@@ -1,82 +1,25 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/index.html" %}
 {% block title %}Welcome to lizqwer home{% endblock %}
 
 {% block content %}
-<script src="/js/post.js"></script>
+<div id="handle">
+  <ul>
+    <li>
+      <form action="/sigin-in-up" method="get" accept-charset="utf-8">
+        <button type="submit">Sigin in</button>
+      </form>
+    </li>
+    <li>
+      <form action="/sigin-up-up" method="get" accept-charset="utf-8">
+        <button type="submit">Sigin up</button>
+      </form>
+    </li>
+  </ul>
+</div>
 
 <div id="main">
-  <p>Welcome to Lizqwer home!</p>
-  <!--
-  <br>
-    <input type="file" id="ffile"/>
-  <button onclick="sendRequest()">Upload</button>
-
-  <form action="/upload-image" method="post" enctype="multipart/form-data">
-    <input id="file" name="file" type="file"><br>
-    <input name="s" type="text">
-    <input type="submit">
-  </form>  
-  <a herf="http://cn-hk-dmit.sakurafrp.com:48787/counter/">counter</a>
-  <a herf="baidu.com">baidu</a>
-  -->
-</div>
-<div id="task">
-  <form action="/add-task" method="post" enctype="multipart/form-data">
-    <fieldset>
-      <p>
-        <label class="head">Name:</label>
-        <input name="id" type="txt">
-      </p>
-      <p>
-        <label class="head">Url:</label>
-        <input name="url" type="text">
-      </p>
-      <p>
-        <label class="head">Attrbutes:</label>
-        <input list="attributes" name="attributes">
-        <datalist id="attributes">
-          <option value="Video">
-        </datalist>
-      </p>
-      <p>
-        <label class="head">Come-from:</label>
-        <input list="come-from" name="come-from" type="text">
-        <datalist id="come-from">
-          <option value="Another">
-          <option value="LingMeiYushuo">
-          <option value="luoli">
-          <option value="MMD">
-          <option value="MS">
-          <option value="Normal">
-          <option value="shanchi">
-          <option value="YY">
-        </datalist>
-      </p>
-      <p>
-        <label class="head">Descriptname:</label>
-        <input name="description" type="text">
-      </p>
-      <p>
-        <label class="head">Download-type:</label>
-        <input name="download-type" checked type="radio" value="local" id="dt1" ><label for="dt1">local</label>
-        <input name="download-type" type="radio" value="common" id="dt2"><label for="dt2">common</label>
-        <input name="download-type" type="radio" value="baidu" id="dt3"><label for="dt3">baidu</label>
-      </p>
-      <p>
-        <label class="head">zipp:</label>
-        <input name="zipp" checked type="radio" value="t" id="z1"><label for="z1">t</label>
-        <input name="zipp" type="radio" value="nil" id="z2"><label for="z2">nil</label>
-      </p>
-      <p>
-        <label class="head">Password:</label>
-        <input list="password" name="password" type="text">
-        <datalist id="password">
-          <option value="nil">
-        </datalist>
-      </p>
-      <button type="submit">update</button> 
-    </fieldset>
-  </form>
+  <h1>Hello</h1>
+  <p>If you want to read, Please sigin in or sigin up</p>
 </div>
 {% endblock %}
 

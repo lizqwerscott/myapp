@@ -1,0 +1,21 @@
+{% extends "layouts/sigin.html" %}
+{% block title %}Welcome to lizqwer home{% endblock %}
+
+{% block content %}
+<div id="head">
+  <ul>
+    <li>
+      <button type="button" onclick="window.location.href='sigin-up.html">Sigin-up</button>
+    </li>
+  </ul> 
+</div>
+<div id="main">
+  <form action="/sigin-in" method="post" enctype="multipart/form-data">
+    <input type="text" value="" name="name" id="name"/><br>
+    <input type="password" value="" name="password" id="password"/><br>
+    <button type="submit" name="b1" id="b1">登录</button>
+  </form>
+</div>
+{% endblock %}
+
+

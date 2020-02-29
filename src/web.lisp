@@ -28,7 +28,10 @@
 ;;  (render #P"index.html"))
 
 (defroute ("/" :method :GET) ()
-          (render #P"index.html"))
+          (let ((counter (incf (gethash :count *session* 0)))) 
+            (if (> counter 1) 
+                (render #P"add-task.html")
+                (render #P"index.html"))))
 
 (defroute ("/hello/post" :method :POST) (&key |file|)
           (format nil "Hello, ~A" |file|)
@@ -46,12 +49,47 @@
 (defun assoc-string (id lists)
   (cdr (assoc id lists :test #'string=)))
 
+(defun verif-sigin (name password)
+  (string= password (getf (car (with-connection (db) 
+                                          (retrieve-all (select :* 
+                                                                (from :user)
+                                                                (where (:= :username name)))))) :userpassword)))
+
+(defun create-user (name password)
+  (with-connection (db)
+                  (retrieve-all 
+                    (insert-into :user
+                                 (set= :id 'NULL
+                                       :userid -1
+                                       :username name
+                                       :userpassword password)))))
+
+
 (defparameter *file-storage-directory* #p"/home/pi/test/")
 
 (defroute "/counter" ()
           (maphash #'(lambda (k v)
                        (format t "K:~A, V:~A" k v)) *session*)
           (format nil "You came here ~A times." (incf (gethash :count *session* 0))))
+
+(defroute ("/sigin-in-up" :method :get) (&key _parsed)
+          (render #P"sigin-in.html"))
+
+(defroute ("/sigin-up-up" :method :get) (&key _parsed)
+          (render #P"sigin-up.html"))
+
+(defroute ("/sigin-in" :method :post) (&key _parsed)
+          (let ((parsed (standardize-parsed _parsed)))
+            (if (verif-sigin (assoc-string "name" parsed) (assoc-string "password" parsed))
+                (render #P"add-task.html")
+                (render #P"sigin.html"))))
+
+(defroute ("/sigin-up" :method :post) (&key _parsed)
+          (let ((parsed (standardize-parsed _parsed)))
+            (if (string= (assoc-string "verif" parsed) "poor-home")
+                (progn (create-user (assoc-string "name" parsed) (assoc-string "password" parsed))
+                       (render #P"sigin-in.html"))
+                (format nil "Please input the right verif"))))
 
 (defroute ("/upload-image" :method :post) (&key _parsed)
           (format t "Image--------:~S" _parsed)
