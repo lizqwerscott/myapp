@@ -67,10 +67,10 @@
       (write-sequence data s)))
   (format nil "Finish"))
 
-(defroute ("/add-task" :method :post) (&key _parsed)
+(defroute ("/add-tasks" :method :post) (&key _parsed)
           (format t "task:~S" (standardize-parsed _parsed)))
 
-(defroute ("/add-tasks" :method :post) (&key _parsed)
+(defroute ("/add-task" :method :post) (&key _parsed)
           (let ((parsed (standardize-parsed _parsed))) 
             (add-task (list :id  (assoc-string "id" parsed)
                             :url (assoc-string "url" parsed)
@@ -80,7 +80,7 @@
                             :download-type (assoc-string "download-type" parsed)
                             :zipp (if (string= "t" (assoc-string "zipp" parsed)) t
                                       (if (string= "nil" (assoc-string "zipp" parsed)) nil))
-                            :password (assoc-string "passowrd" parsed))))
+                            :password (assoc-string "password" parsed))))
           (format nil "Finish")
           )
 
