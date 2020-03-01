@@ -27,19 +27,6 @@
 ;;(defroute "/" (&key (|name| ""))
 ;;  (render #P"index.html"))
 
-(defroute ("/" :method :GET) ()
-          (let ((counter (incf (gethash :count *session* 0)))) 
-            (if (> counter 1) 
-                (render #P"add-task.html")
-                (render #P"index.html"))))
-
-(defroute ("/hello/post" :method :POST) (&key |file|)
-          (format nil "Hello, ~A" |file|)
-          (with-open-file (in "/home/lizqwer/test/temp.html" :direction :output)
-            (format in |file|)
-            )
-          )
-
 (defun standardize-parsed (parsed)
   (mapcar #'(lambda (value)
               (if (listp (cdr value))
@@ -50,10 +37,14 @@
   (cdr (assoc id lists :test #'string=)))
 
 (defun verif-sigin (name password)
-  (string= password (getf (car (with-connection (db) 
-                                          (retrieve-all (select :* 
-                                                                (from :user)
-                                                                (where (:= :username name)))))) :userpassword)))
+  (format t "verif-sigin:name:~A, password:~A~%" name password)
+  (if (and name password) 
+      (string= password 
+               (getf (car (with-connection (db) 
+                            (retrieve-all (select :*
+                                                  (from :user)
+                                                  (where (:= :username name)))))) 
+                     :userpassword))))
 
 (defun create-user (name password)
   (with-connection (db)
@@ -64,6 +55,16 @@
                                        :username name
                                        :userpassword password)))))
 
+(defroute ("/" :method :GET) ()
+          (format t "/~%")
+          (if (verif-sigin (gethash :username *session*) (gethash :userpassword *session*))
+              (render #P"add-task.html")
+              (render #P"index.html")))
+
+(defroute ("/hello/post" :method :POST) (&key |file|)
+          (format nil "Hello, ~A" |file|)
+          (with-open-file (in "/home/lizqwer/test/temp.html" :direction :output)
+            (format in |file|)))
 
 (defparameter *file-storage-directory* #p"/home/pi/test/")
 
@@ -81,8 +82,10 @@
 (defroute ("/sigin-in" :method :post) (&key _parsed)
           (let ((parsed (standardize-parsed _parsed)))
             (if (verif-sigin (assoc-string "name" parsed) (assoc-string "password" parsed))
-                (render #P"add-task.html")
-                (render #P"sigin.html"))))
+                (progn (setf (gethash :username *session*) (assoc-string "name" parsed)) 
+                       (setf (gethash :userpassword *session*) (assoc-string "password" parsed))
+                       (render #P"add-task.html"))
+                (render #P"sigin-in.html"))))
 
 (defroute ("/sigin-up" :method :post) (&key _parsed)
           (let ((parsed (standardize-parsed _parsed)))

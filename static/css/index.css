@@ -1,4 +1,29 @@
 #handle {
-  top: 0;
-  right: 0;
+  position: relative;
+  bottom: 16px;
+  background-color: yellowgreen;
+}
+
+#handle ul {
+  position: relative;
+  left: 1700px;
+}
+
+#in {
+   position: relative;
+   top: 10px;
+}
+
+#up {
+  position: relative;
+  left: 89px;
+  bottom: 12px;
+}
+
+#main {
+  text-align: center;
+}
+
+body {
+  background-color: pink;
 }
