@@ -121,6 +121,8 @@
                             :download-type (assoc-string "download-type" parsed)
                             :zipp (if (string= "t" (assoc-string "zipp" parsed)) t
                                       (if (string= "nil" (assoc-string "zipp" parsed)) nil))
+                            :extractp (if (string= "t" (assoc-string "extractp" parsed)) 
+                                          (if (string= "nil" (assoc-string "extractp" parsed)) nil))
                             :password (assoc-string "password" parsed))))
           (format nil "Finish")
           )
