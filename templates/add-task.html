@@ -19,6 +19,9 @@
   -->
 </div>
 <div id="task">
+  <script charset="utf-8">
+    changeComeFrom();
+  </script>
   <form action="/add-task" method="post" enctype="multipart/form-data">
     <fieldset>
       <p>
@@ -31,9 +34,11 @@
       </p>
       <p>
         <label class="head">Attrbutes:</label>
-        <input list="attributes" name="attributes">
+        <input list="attributes" name="attributes" id="attributes">
         <datalist id="attributes">
           <option value="Video">
+          <option value="Game">
+          <option value="Music">
         </datalist>
       </p>
       <p>

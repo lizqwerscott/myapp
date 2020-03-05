@@ -110,3 +110,87 @@
       xhr.setRequestHeader("X_Requested_With", location.href.split("/")[3].replace(/[^a-z]+/g, '$'));
       xhr.send(fd);
     }
+
+function changeComeFrom() {
+  var attributesI = document.getElementById("attributes");
+  attributeI.addEventListener("change", function() {
+    var value = attributeI.value;
+    var comeFrom = document.getElementById("come-from");
+    var removeChilds = function () {
+        var childs = comeFrom.childNodes;
+        for (var i = childs.length - 1; i >= 0; i--) {
+          comeFrom.removeChild(childs[i]);
+        }
+    }
+    switch(value){
+      case "Video":
+        removeChilds();
+        var oa = createElement("option");
+        oa.value = "Another";
+        comeFrom.appendChild(oa);
+        var ol = createElement("option");
+        oa.value = "LingMeiYushuo";
+        comeFrom.appendChild(ol);
+        var olu = createElement("option");
+        oa.value = "luoli";
+        comeFrom.appendChild(olu);
+        var om = createElement("option");
+        oa.value = "MMD";
+        comeFrom.appendChild(om);
+        var oms = createElement("option");
+        oa.value = "MS";
+        comeFrom.appendChild(oms);
+        var on = createElement("option");
+        oa.value = "Normal";
+        comeFrom.appendChild(on);
+        var osh = createElement("option");
+        oa.value = "shanchi";
+        comeFrom.appendChild(osh);
+        var oyy = createElement("option");
+        oa.value = "YY";
+        comeFrom.appendChild(oyy);
+        break;
+      case "Game":
+        removeChilds();
+        var ol = createElement("option");
+        oa.value = "LingMeiYushuo";
+        comeFrom.appendChild(ol);
+        var on = createElement("option");
+        oa.value = "Normal";
+        comeFrom.appendChild(on);
+        break;
+      case "Music":
+        removeChilds();
+        var ol = createElement("option");
+        oa.value = "LingMeiYushuo";
+        break;
+      default:
+        removeChilds();
+        var oa = createElement("option");
+        oa.value = "Another";
+        comeFrom.appendChild(oa);
+        var ol = createElement("option");
+        oa.value = "LingMeiYushuo";
+        comeFrom.appendChild(ol);
+        var olu = createElement("option");
+        oa.value = "luoli";
+        comeFrom.appendChild(olu);
+        var om = createElement("option");
+        oa.value = "MMD";
+        comeFrom.appendChild(om);
+        var oms = createElement("option");
+        oa.value = "MS";
+        comeFrom.appendChild(oms);
+        var on = createElement("option");
+        oa.value = "Normal";
+        comeFrom.appendChild(on);
+        var osh = createElement("option");
+        oa.value = "shanchi";
+        comeFrom.appendChild(osh);
+        var oyy = createElement("option");
+        oa.value = "YY";
+        comeFrom.appendChild(oyy);
+        break;
+    }
+  });
+}
