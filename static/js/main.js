@@ -112,9 +112,10 @@
     }
 
 function changeComeFrom() {
-  var attributesI = document.getElementById("attributes");
-  attributeI.addEventListener("change", function() {
-    var value = attributeI.value;
+  var atp = document.getElementById("ap");
+  var attributesI = atp.childNodes[3];
+  attributesI.addEventListener("change", function() {
+    var value = attributesI.value;
     var comeFrom = document.getElementById("come-from");
     var removeChilds = function () {
         var childs = comeFrom.childNodes;
@@ -125,70 +126,71 @@ function changeComeFrom() {
     switch(value){
       case "Video":
         removeChilds();
-        var oa = createElement("option");
+        var oa = document.createElement("option");
         oa.value = "Another";
         comeFrom.appendChild(oa);
-        var ol = createElement("option");
-        oa.value = "LingMeiYushuo";
+        var ol = document.createElement("option");
+        ol.value = "LingMeiYushuo";
         comeFrom.appendChild(ol);
-        var olu = createElement("option");
-        oa.value = "luoli";
+        var olu = document.createElement("option");
+        olu.value = "luoli";
         comeFrom.appendChild(olu);
-        var om = createElement("option");
-        oa.value = "MMD";
+        var om = document.createElement("option");
+        om.value = "MMD";
         comeFrom.appendChild(om);
-        var oms = createElement("option");
-        oa.value = "MS";
+        var oms = document.createElement("option");
+        oms.value = "MS";
         comeFrom.appendChild(oms);
-        var on = createElement("option");
-        oa.value = "Normal";
+        var on = document.createElement("option");
+        on.value = "Normal";
         comeFrom.appendChild(on);
-        var osh = createElement("option");
-        oa.value = "shanchi";
+        var osh = document.createElement("option");
+        osh.value = "shanchi";
         comeFrom.appendChild(osh);
-        var oyy = createElement("option");
-        oa.value = "YY";
+        var oyy = document.createElement("option");
+        oyy.value = "YY";
         comeFrom.appendChild(oyy);
         break;
       case "Game":
         removeChilds();
-        var ol = createElement("option");
-        oa.value = "LingMeiYushuo";
+        var ol = document.createElement("option");
+        ol.value = "LingMengYushuo";
         comeFrom.appendChild(ol);
-        var on = createElement("option");
-        oa.value = "Normal";
+        var on = document.createElement("option");
+        on.value = "Normal";
         comeFrom.appendChild(on);
         break;
       case "Music":
         removeChilds();
-        var ol = createElement("option");
-        oa.value = "LingMeiYushuo";
+        var ol = document.createElement("option");
+        ol.value = "LingMeiYushuo";
+        comeFrom.appendChild(ol);
         break;
       default:
         removeChilds();
-        var oa = createElement("option");
+        var oa = document.createElement("option");
         oa.value = "Another";
         comeFrom.appendChild(oa);
-        var ol = createElement("option");
-        oa.value = "LingMeiYushuo";
+        var ol = document.createElement("option");
+        ol.value = "LingMeiYushuo";
         comeFrom.appendChild(ol);
-        var olu = createElement("option");
-        oa.value = "luoli";
+        var olu = document.createElement("option");
+        olu.value = "luoli";
         comeFrom.appendChild(olu);
-        var om = createElement("option");
-        oa.value = "MMD";
+        var om = document.createElement("option");
+        om.value = "MMD";
         comeFrom.appendChild(om);
-        var oms = createElement("option");
-        oa.value = "MS";
+        var oms = document.createElement("option");
+        oms.value = "MS";
         comeFrom.appendChild(oms);
-        var on = createElement("option");
-        oa.value = "Normal";
+        var on = document.createElement("option");
+        on.value = "Normal";
         comeFrom.appendChild(on);
-        var osh = createElement("option");
-        oa.value = "shanchi";
+        var osh = document.createElement("option");
+        osh.value = "shanchi";
         comeFrom.appendChild(osh);
-        var oyy = createElement("option");
-        oa.value = "YY";
+        var oyy = document.createElement("option");
+        oyy.value = "YY";
         comeFrom.appendChild(oyy);
         break;
     }
