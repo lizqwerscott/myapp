@@ -154,7 +154,7 @@ function changeComeFrom() {
       case "Game":
         removeChilds();
         var ol = document.createElement("option");
-        ol.value = "LingMengYushuo";
+        ol.value = "LingMengYuShuo";
         comeFrom.appendChild(ol);
         var on = document.createElement("option");
         on.value = "Normal";
