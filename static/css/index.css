@@ -1,29 +1,4 @@
-#handle {
-  position: relative;
-  bottom: 16px;
-  background-color: #FFA500;
-}
-
-#handle ul {
-  position: relative;
-  left: 1700px;
-}
-
-#in {
-   position: relative;
-   top: 10px;
-}
-
-#up {
-  position: relative;
-  left: 89px;
-  bottom: 12px;
-}
-
 #main {
   text-align: center;
 }
 
-body {
-  background-color: #FFEC8B;
-}
