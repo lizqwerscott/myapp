@@ -94,10 +94,6 @@
                        (render #P"sigin-in.html"))
                 (format nil "Please input the right verif"))))
 
-(defroute ("/upload-image" :method :post) (&key _parsed)
-          (format t "Image--------:~S" _parsed)
-          (format nil "Finish"))
-
 (defroute ("/upload-images" :method :post) (&key |file|)
   (let ((filename (second |file|))
     (data (slot-value (first |file|) 'flexi-streams::vector)))
@@ -124,8 +120,7 @@
                             :extractp (if (string= "t" (assoc-string "extractp" parsed)) 
                                           (if (string= "nil" (assoc-string "extractp" parsed)) nil))
                             :password (assoc-string "password" parsed))))
-          (format nil "Finish")
-          )
+          (format nil "Finish"))
 
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
