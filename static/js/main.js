@@ -196,3 +196,22 @@ function changeComeFrom() {
     }
   });
 }
+
+function searchTable() {
+  var value = document.getElementById("s-name").value; 
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.status == 200) {
+      if (xhr.responseText) {
+        var showResult = document.getElementById("search-results"); 
+        showResult.innerHTML = xhr.responseText;
+      }
+    }
+  }
+  fd = new FormData();
+  fd.append("s-name", value);
+  
+  xhr.open("POST", "/search-table", true);
+  xhr.send(fd);
+}
+

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div id="main">
-  <p>Welcome to Lizqwer home!</p>
+  <h1>Welcome to Lizqwer home!</h1>
   <!--
   <br>
     <input type="file" id="ffile"/>
@@ -19,6 +19,7 @@
   -->
 </div>
 <div id="task">
+  <h2>Add the task</h2>
   <form action="/add-task" method="post" enctype="multipart/form-data">
     <fieldset>
       <p>
@@ -82,10 +83,17 @@
       <button type="submit">update</button> 
     </fieldset>
   </form>
-  <script charset="utf-8">
-    changeComeFrom();
-  </script>
 </div>
+<div id="search">
+  <h2>Search the table</h2>
+  <input type="text" value="" name="s-name" id="s-name"/>
+  <button type="button" onclick="searchTable()">Search</button><br>
+  <label>Results:</label>
+  <p id="search-results">It's the search results</p>
+</div>
+<script charset="utf-8">
+  changeComeFrom();
+</script>
 {% endblock %}
 
 

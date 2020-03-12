@@ -122,6 +122,15 @@
                             :password (assoc-string "password" parsed))))
           (format nil "Finish"))
 
+(defroute ("/search-table" :method :post) (&key _parsed) 
+          (let ((parsed (standardize-parsed _parsed))) 
+            (let ((table-one (web-manager.file:search-table (assoc-string "s-name" parsed)))) 
+              (if table-one 
+                  (progn (format t "~A~%" (web-manager.file::table-id table-one)) 
+                         (format nil "~A" (web-manager.file::table-id table-one))) 
+                  (progn (format t "Don't find~%") 
+                         (format nil "Don't find"))))))
+
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
 
