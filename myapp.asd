@@ -11,6 +11,9 @@
 
                ;; My app
                "web-manager"
+                
+               ;; json
+               "jonathan"
 
                ;; for @route annotation
                "cl-syntax-annot"

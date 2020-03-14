@@ -197,14 +197,69 @@ function changeComeFrom() {
   });
 }
 
+function restInputById(name) {
+  if (arguments.length == 1) {
+    document.getElementById(name).value = "";
+  } else if (arguments.length == 2) {
+    document.getElementById(name).value = arguments[1];
+  }
+}
+
+function clearAdd() {
+  restInputById("id");
+  restInputById("url");
+  restInputById("attributes");
+  restInputById("come-from");
+  restInputById("description");
+  restInputById("description");
+  document.getElementById("dt1").checked = true;
+  document.getElementById("dt2").checked = false;
+  document.getElementById("dt3").checked = false;
+
+  document.getElementById("e1").checked = true;
+  document.getElementById("e2").checked = false;
+
+  document.getElementById("z1").checked = true;
+  document.getElementById("z2").checked = false;
+  restInputById("password");
+}
+
+function clearTable() {
+  document.getElementById("s-name").value = "";
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("search-id").innerHTML = "";
+  document.getElementById("search-url").innerHTML = "";
+  document.getElementById("search-attributes").innerHTML = "";
+  document.getElementById("search-come-from").innerHTML = "";
+  document.getElementById("search-description").innerHTML = "";
+  document.getElementById("search-download-type").innerHTML = "";
+  document.getElementById("search-extractp").innerHTML = "";
+  document.getElementById("search-zipp").innerHTML = "";
+  document.getElementById("search-password").innerHTML = "";
+}
+
 function searchTable() {
   var value = document.getElementById("s-name").value; 
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function() {
     if (xhr.status == 200) {
-      if (xhr.responseText) {
-        var showResult = document.getElementById("search-results"); 
-        showResult.innerHTML = xhr.responseText;
+      if (xhr.responseText == "nil") {
+        clearTable();
+        document.getElementById("result").innerHTML = "Don't find " + value;
+      }
+      else {
+        clearTable();
+        document.getElementById("result").innerHTML = "Find";
+        var results = JSON.parse(xhr.responseText);
+        document.getElementById("search-id").innerHTML = results.ID;
+        document.getElementById("search-url").innerHTML = results.URL;
+        document.getElementById("search-attributes").innerHTML = results.ATTRIBUTES;
+        document.getElementById("search-come-from").innerHTML = results['COME-FROM'];
+        document.getElementById("search-description").innerHTML = results.DESCRIPTION;
+        document.getElementById("search-download-type").innerHTML = results['DOWNLOAD-TYPE'];
+        document.getElementById("search-extractp").innerHTML = results.EXTRACTP;
+        document.getElementById("search-zipp").innerHTML = results.ZIPP;
+        document.getElementById("search-password").innerHTML = results.PASSWORD;
       }
     }
   }

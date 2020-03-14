@@ -7,6 +7,7 @@
         :myapp.db
         :datafly
         :sxql
+        :jonathan
         :web-manager)
   (:export :*web*))
 (in-package :myapp.web)
@@ -122,14 +123,20 @@
                             :password (assoc-string "password" parsed))))
           (format nil "Finish"))
 
+(defun standardize-pi-json (pi-info) 
+  (to-json (progn (setf (getf pi-info :path) (uiop:unix-namestring (getf pi-info :path))) 
+                  (setf (getf pi-info :y-path) (uiop:unix-namestring (getf pi-info :y-path))) 
+                  (setf (getf pi-info :b-path) (uiop:unix-namestring (getf pi-info :b-path))) 
+                  pi-info)))
+
 (defroute ("/search-table" :method :post) (&key _parsed) 
           (let ((parsed (standardize-parsed _parsed))) 
             (let ((table-one (web-manager.file:search-table (assoc-string "s-name" parsed)))) 
               (if table-one 
-                  (progn (format t "~A~%" (web-manager.file::table-id table-one)) 
-                         (format nil "~A" (web-manager.file::table-id table-one))) 
+                  (progn (format t "~A~%~A~%" (web-manager.file::table-id table-one) (web-manager.file::table-pi table-one)) 
+                         (standardize-pi-json (web-manager.file::table-pi table-one))) 
                   (progn (format t "Don't find~%") 
-                         (format nil "Don't find"))))))
+                         (format nil "nil"))))))
 
 (defroute ("/sendR" :method :post) (&key _parsed)
           (format t "finish:~S" _parsed))
