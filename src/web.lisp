@@ -59,7 +59,7 @@
 (defroute ("/" :method :GET) ()
           (format t "/~%")
           (if (verif-sigin (gethash :username *session*) (gethash :userpassword *session*))
-              (render #P"add-task.html")
+              (render #P"main.html")
               (render #P"index.html")))
 
 (defroute ("/hello/post" :method :POST) (&key |file|)
@@ -85,7 +85,7 @@
             (if (verif-sigin (assoc-string "name" parsed) (assoc-string "password" parsed))
                 (progn (setf (gethash :username *session*) (assoc-string "name" parsed)) 
                        (setf (gethash :userpassword *session*) (assoc-string "password" parsed))
-                       (render #P"add-task.html"))
+                       (render #P"main.html"))
                 (render #P"sigin-in.html"))))
 
 (defroute ("/sigin-up" :method :post) (&key _parsed)

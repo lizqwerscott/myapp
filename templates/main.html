@@ -1,0 +1,112 @@
+{% extends "layouts/default.html" %}
+{% block title %}add-task{% endblock %}
+
+{% block content %}
+<div id="main">
+  <h1>Welcome to Lizqwer home!</h1>
+  <!--
+  <br>
+    <input type="file" id="ffile"/>
+  <button onclick="sendRequest()">Upload</button>
+
+  <form action="/upload-image" method="post" enctype="multipart/form-data">
+    <input id="file" name="file" type="file"><br>
+    <input name="s" type="text">
+    <input type="submit">
+  </form>  
+  <a herf="http://cn-hk-dmit.sakurafrp.com:48787/counter/">counter</a>
+  <a herf="baidu.com">baidu</a>
+  -->
+</div>
+<div id="task">
+  <h2>Add the task</h2>
+  <form action="/add-task" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <p>
+        <label class="head">Name:</label>
+        <input name="id" id="id"type="txt">
+      </p>
+      <p>
+        <label class="head">Url:</label>
+        <input name="url" id="url" type="text">
+      </p>
+      <p id="ap">
+        <label class="head">Attrbutes:</label>
+        <input list="attributes" name="attributes" id="attributes">
+        <datalist id="attributes">
+          <option value="Video">
+          <option value="Game">
+          <option value="Music">
+        </datalist>
+      </p>
+      <p>
+        <label class="head">Come-from:</label>
+        <input list="come-from" name="come-from" id="come-from" type="text">
+        <datalist id="come-from">
+          <option value="Another">
+          <option value="LingMeiYushuo">
+          <option value="luoli">
+          <option value="MMD">
+          <option value="MS">
+          <option value="Normal">
+          <option value="shanchi">
+          <option value="YY">
+        </datalist>
+      </p>
+      <p>
+        <label class="head">Description:</label>
+        <input name="description" id="description" type="text">
+      </p>
+      <p>
+        <label class="head">Download-type:</label>
+        <input name="download-type" checked type="radio" value="local" id="dt1" ><label for="dt1">local</label>
+        <input name="download-type" type="radio" value="common" id="dt2"><label for="dt2">common</label>
+        <input name="download-type" type="radio" value="baidu" id="dt3"><label for="dt3">baidu</label>
+      </p>
+      <p>
+        <label class="head">extractp:</label>
+        <input checked value="t" type="radio" name="extractp" id="e1"/><label for="e1">t</label>
+        <input value="nil" type="radio" name="extractp" id="e2"/><label for="e2">nil</label>
+      </p>
+      <p>
+        <label class="head">zipp:</label>
+        <input name="zipp" checked type="radio" value="t" id="z1"><label for="z1">t</label>
+        <input name="zipp" type="radio" value="nil" id="z2"><label for="z2">nil</label>
+      </p>
+      <p>
+        <label class="head">Password:</label>
+        <input list="password" name="password" id="password" type="text">
+        <datalist id="password">
+          <option value="nil">
+        </datalist>
+      </p>
+      <button type="submit">update</button> 
+      <button type="button" onclick="clearAdd()">Rest</button>
+    </fieldset>
+  </form>
+</div>
+<div id="search">
+  <h2>Search the table</h2>
+  <input type="text" value="" name="s-name" id="s-name"/>
+  <button type="button" onclick="searchTable()">Search</button>
+  <button type="button" onclick="clearTable()">Rest</button><br>
+  <label>Results:<span id="result"></span></label>
+  <p></p>
+  <ul>
+    <li>Name:<br><span id="search-id"></span></li>
+    <li>Url:<br><span id="search-url"></span></li>
+    <li>Attributes:<br><span id="search-attributes"></span></li>
+    <li>Come-from:<br><span id="search-come-from"></span></li>
+    <li>Description:<br><span id="search-description"></span></li>
+    <li>Download-type:<br><span id="search-download-type"></span></li>
+    <li>extractp:<br><span id="search-extractp"></span></li>
+    <li>zipp:<br><span id="search-zipp"></span></li>
+    <li>password:<br><span id="search-password"></span></li>
+  </ul>
+</div>
+<script charset="utf-8">
+  changeComeFrom();
+</script>
+{% endblock %}
+
+
