@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
-  background-color: gainsboro;
+  background-image: url("/images/background2.jpg");
 }
 
 a:link {
@@ -23,9 +23,8 @@ a:hover {
 }
 
 #task form fieldset {
-  border: 1;
+  border: 0;
   text-align: left;
-  background-color: #EEA2AD;
 }
 
 #task .head {
@@ -36,6 +35,9 @@ a:hover {
 
 #task input [type="text"] {
   width: 100px;
+  outline-style: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 #task button {
@@ -66,4 +68,7 @@ a:hover {
   background: linear-gradient(to bottom, #eeeff9 0%,#3399ff 100%);
 }
 
-
+#search, #task {
+  font-size: 15px;
+  color: red;
+}
