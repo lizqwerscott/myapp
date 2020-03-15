@@ -19,7 +19,7 @@ a:hover {
 
 #main {
   text-align: center;
-  color: red;
+  color: white;
 }
 
 #task form fieldset {
@@ -33,7 +33,7 @@ a:hover {
   text-align: left;
 }
 
-body input[type="text"] {
+input[type="text"] {
   width: 150px;
   height: 30px;
   line-height: 30px;
@@ -51,7 +51,7 @@ body input[type="text"] {
 
 #task label {
   color: #fff;
-  background: #7AB893;
+  background: rgba(255, 255, 100, 0.1);
   display: inline-block;
   padding: 7px 4px;
   transform-origin: left center;
@@ -62,6 +62,6 @@ body input[type="text"] {
 
 #search, #task {
   font-size: 15px;
-  color: red;
+  color: white;
 }
 
