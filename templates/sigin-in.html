@@ -6,16 +6,22 @@
   <ul>
     <li id="up">
       <form action="/sigin-up-up" method="get" accept-charset="utf-8">
-        <button type="submit">Sigin up</button>
+        <button type="submit" class="css_btn_class">Sigin up</button>
       </form>
     </li>
   </ul> 
 </div>
 <div id="main">
   <form action="/sigin-in" method="post" enctype="multipart/form-data">
-    <span><input type="text" value="" name="name" id="name"/></span><br>
-    <input type="password" value="" name="password" id="password"/><br>
-    <button type="submit" name="b1" id="b1">登录</button>
+    <label>
+      <span>User Name:</span>
+      <input type="text" value="" name="name" id="name"/>
+    </label><br>
+    <label>
+      <span>User password:</span>
+      <input type="password" value="" name="password" id="password"/>
+    </label><br>
+    <button type="submit" name="b1" id="b1" class="css_btn_class">登录</button>
   </form>
 </div>
 {% endblock %}

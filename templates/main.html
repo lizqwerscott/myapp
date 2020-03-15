@@ -24,7 +24,7 @@
     <fieldset>
       <p>
         <label class="head">Name:</label>
-        <input name="id" id="id"type="txt">
+        <input name="id" id="id" type="text">
       </p>
       <p>
         <label class="head">Url:</label>
@@ -32,7 +32,7 @@
       </p>
       <p id="ap">
         <label class="head">Attrbutes:</label>
-        <input list="attributes" name="attributes" id="attributes">
+        <input list="attributes" name="attributes" type="text"> 
         <datalist id="attributes">
           <option value="Video">
           <option value="Game">
@@ -41,7 +41,7 @@
       </p>
       <p>
         <label class="head">Come-from:</label>
-        <input list="come-from" name="come-from" id="come-from" type="text">
+        <input list="come-from" name="come-from" type="text">
         <datalist id="come-from">
           <option value="Another">
           <option value="LingMeiYushuo">
@@ -80,16 +80,16 @@
           <option value="nil">
         </datalist>
       </p>
-      <button type="submit">update</button> 
-      <button type="button" onclick="clearAdd()">Rest</button>
+      <button type="submit" class="css_btn_class">update</button> 
+      <button type="button" onclick="clearAdd()" class="css_btn_class">Rest</button>
     </fieldset>
   </form>
 </div>
 <div id="search">
   <h2>Search the table</h2>
   <input type="text" value="" name="s-name" id="s-name"/>
-  <button type="button" onclick="searchTable()">Search</button>
-  <button type="button" onclick="clearTable()">Rest</button><br>
+  <button type="button" onclick="searchTable()" class="css_btn_class">Search</button>
+  <button type="button" onclick="clearTable()" class="css_btn_class">Rest</button><br>
   <label>Results:<span id="result"></span></label>
   <p></p>
   <ul>
@@ -104,7 +104,7 @@
     <li>password:<br><span id="search-password"></span></li>
   </ul>
 </div>
-<script charset="utf-8">
+<script charset="utf-8" type="javascript">
   changeComeFrom();
 </script>
 {% endblock %}

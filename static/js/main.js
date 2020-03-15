@@ -208,8 +208,8 @@ function restInputById(name) {
 function clearAdd() {
   restInputById("id");
   restInputById("url");
-  restInputById("attributes");
-  restInputById("come-from");
+  document.getElementsByName("attributes").item(0).value = "";
+  document.getElementsByName("come-from").item(0).value = "";
   restInputById("description");
   restInputById("description");
   document.getElementById("dt1").checked = true;
